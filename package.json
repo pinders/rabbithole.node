@@ -4,7 +4,9 @@
   "description": "Opinionated, RabbitMQ-based microservices framework.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "service": "nodemon src/examples/service.js --exec babel-node",
+    "client": "nodemon src/examples/client.js --exec babel-node",
+    "test": "jest",
     "build": "babel src -d lib"
   },
   "repository": {
@@ -19,11 +21,25 @@
   "homepage": "https://github.com/pinders/rabbithole.node#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.1.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
-    "eslint": "^4.16.0",
+    "eslint": "^4.13.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.8.0",
-    "flow-bin": "^0.64.0"
+    "eslint-plugin-jest": "^21.6.2",
+    "flow-bin": "^0.64.0",
+    "jest": "^22.1.1",
+    "jest-cli": "^22.1.1",
+    "nodemon": "^1.10.0"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "amqplib-flow": "^1.1.0",
+    "lodash": "^4.17.4",
+    "uuid": "^3.2.1"
   }
 }

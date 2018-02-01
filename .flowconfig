@@ -3,6 +3,7 @@
 [include]
 
 [libs]
+node_modules/amqplib-flow/types.js
 
 [lints]
 
