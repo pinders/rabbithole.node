@@ -1,0 +1,29 @@
+{
+  "name": "rabbithole",
+  "version": "1.0.0",
+  "description": "Opinionated, RabbitMQ-based microservices framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinders/rabbithole.node.git"
+  },
+  "author": "Erik Pinders",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinders/rabbithole.node/issues"
+  },
+  "homepage": "https://github.com/pinders/rabbithole.node#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "flow-bin": "^0.64.0"
+  }
+}
