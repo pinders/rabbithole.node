@@ -34,7 +34,7 @@ export default class RabbitHoleClient {
   /*
    *  Methods
    */
-  async publish(msg: ClientMessage): Promise<void> {
+  async publish(msg: ClientMessage): Promise<Error | void> {
     try {
       if (!this.connection) {
         this.connection = await amqp.connect(this.connectionUrl);
