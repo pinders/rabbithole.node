@@ -1,7 +1,7 @@
 {
   "name": "rabbithole-js",
   "access": "public",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Opinionated, RabbitMQ-based microservices framework.",
   "main": "lib/index.js",
   "scripts": {
