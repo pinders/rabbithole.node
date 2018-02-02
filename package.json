@@ -1,13 +1,15 @@
 {
-  "name": "rabbithole",
+  "name": "rabbithole-js",
+  "access": "public",
   "version": "1.0.0",
   "description": "Opinionated, RabbitMQ-based microservices framework.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "service": "nodemon src/examples/service.js --exec babel-node",
     "client": "nodemon src/examples/client.js --exec babel-node",
-    "test": "jest",
-    "build": "babel src -d lib"
+    "test": "jest --coverage --forceExit --runInBand",
+    "build": "babel src -d lib",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

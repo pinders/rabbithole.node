@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- node
+before_deploy:
+- npm run build
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: erik.pinders@gmail.com
+  api_key:
+    secure: p9gg5msp4O+JgY6X5L/ByIirqfSfePD8cONhnL7V3eFerkNUhFcp22XqBBR3EospmUkHqm5ZEaDBukpWrQyHALOn94Z1bcbr8iR24yor9SeUg5euT1d7hAaeftCktG0yGGKGY/meDgDNe9QiEy1nNT5cG18EupQJOwmO9Li8ggtMisPzTeV00DM/QXotQ6RWb1rf/hN03uA/DEjPrkaeId+PLbEmHF02yxEwvfCrylQ0iiXtowgd6ddE7tL/VIehsZJsYw1fS4uNAG/9PTQqvAiFCF4YR2FQc4mo8s7xVw2ZQvo45bFqi/LMFbYYddLSoGX8/DG19vmQgzbOelKCCVPx+UsqnkhcduAwrxZak7rrMDjwqN/vqYk5V0PuSWjcEUPSsske/xFapXAbe6DkZaZhioWEb2v2wjrybvtYt8ywgmErX684nUdtPDJgHFZlNOlYXBzVkCLC8qrYI0ip5QsOGUCPjjWBUARzuXOlaBPi1QgDq4zOMDmkmSpnTdldhKIertx/JN4wUauFEcwNKzCNcTEjzliq0i0I5hV29KsD65l9M3gtd8VqzlTvelUQSCx2w5wm86nBugNJCKtTHbVxQySwm1qKld2U3z0ZFY/eN2arZ/Kv3k4JVL3BAQ+6TUJr527q77v1PiYi+JJ3L+/aAonf6Aw8695px5Uyx9s=
+  on:
+    tags: true
+    repo: pinders/rabbithole.node
