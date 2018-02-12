@@ -11,7 +11,6 @@ type EventsObject = {
 type ServiceOptions = {
   serviceName?: string,
   connectionUrl?: string,
-  events?: EventsObject,
 };
 
 export default class RabbitHoleService {
@@ -23,6 +22,8 @@ export default class RabbitHoleService {
   connection: amqp.Connection;
   channel: amqp.Channel;
   events: EventsObject;
+  tasks: EventsObject;
+  rpcs: EventsObject;
 
   /*
    *  Class constructor
@@ -33,22 +34,47 @@ export default class RabbitHoleService {
     this.serviceName = options.serviceName || uuidv1();
     this.connectionUrl = options.connectionUrl || '';
 
-    this.events = options.events || {};
+    this.events = {};
+    this.tasks = {};
+    this.rpcs = {};
+  }
+
+  async assertExchanges(exchanges: Array<string>): Promise<void> {
+    exchanges.forEach((exchange) => {
+      this.channel.assertExchange(exchange, 'topic');
+    });
+  }
+
+  async handle() {
+
   }
 
   /*
    *  Methods
    */
+  event(bindingKey: string, processFn: (msg: amqp.Message) => void) {
+    this.events[bindingKey] = processFn;
+  }
+
+  task(bindingKey: string, processFn: (msg: amqp.Message) => void) {
+    this.tasks[bindingKey] = processFn;
+  }
+
+  rpc(bindingKey: string, processFn: (msg: amqp.Message) => void) {
+    this.rpcs[bindingKey] = processFn;
+  }
+
   async start(): Promise<string> {
     try {
       this.connection = await amqp.connect(this.connectionUrl);
 
       this.channel = await this.connection.createChannel();
 
-      this.channel.assertExchange('events', 'topic');
-
+      await this.assertExchanges(['events', 'tasks', 'rpcs']);
 
       const eventKeys: [string] = _.keys(this.events);
+      const taskKeys: [string] = _.keys(this.tasks);
+      const rpcKeys: [string] = _.keys(this.rpcs);
 
       eventKeys.forEach(async (key: string): Promise<void> => {
         const q = await this.channel.assertQueue(`service:"${this.serviceName}".bindingKey:"${key}"`, {

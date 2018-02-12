@@ -9,7 +9,10 @@ type ClientOptions = {
 
 type ClientMessage = {
   routingKey?: string,
-  content?: string,
+  deliveryMode?: number,
+  headers?: { [string]: any },
+  properties?: { [string]: any },
+  payload?: string,
 }
 
 export default class RabbitHoleClient {
@@ -34,7 +37,7 @@ export default class RabbitHoleClient {
   /*
    *  Methods
    */
-  async publish(msg: ClientMessage): Promise<Error | void> {
+  async publish(exchangeName: string, msg: ClientMessage): Promise<Error | void> {
     try {
       if (!this.connection) {
         this.connection = await amqp.connect(this.connectionUrl);
@@ -46,7 +49,7 @@ export default class RabbitHoleClient {
 
       this.channel.assertExchange('events', 'topic');
 
-      this.channel.publish('events', msg.routingKey || '', Buffer.from(msg.content || ''));
+      this.channel.publish('events', msg.routingKey || '', Buffer.from(msg.payload || ''));
     } catch (err) {
       console.log(err);
     }

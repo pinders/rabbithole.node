@@ -1,15 +1,16 @@
 import { RabbitHoleClient } from '../';
 
 const client = new RabbitHoleClient({
-  connectionUrl: 'amqp://wlfegxhr:KMWLWPs99fuSpSULe1Cb-x2WVsfSfC10@impala.rmq.cloudamqp.com/wlfegxhr',
+  clientName: 'DevClient',
+  connectionUrl: '',
 });
 
-client.publish({
+client.publish('events', {
   routingKey: 'user.signedIn',
-  content: 'Hallo vom Client',
+  payload: 'Hallo vom Client',
 });
 
-client.publish({
+client.publish('events', {
   routingKey: 'user.signedIn',
-  content: 'Noch ein Nachricht',
+  payload: 'Noch ein Nachricht',
 });
